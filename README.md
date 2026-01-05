@@ -4,9 +4,9 @@
 2. build_db.py: 생성된 json 파일을 local Vector DB(chroma)에 저장
 3. chat_agent.py : prompt UI의 질문 입력 UI  실행
 
-
-PDF_SERVICES_CLIENT_ID=e71430df90eb4c7584dd3996b2a37e3b
-PDF_SERVICES_CLIENT_SECRET=p8e--Xy8plM98QjgjCbhQf5h-J6Xsfshv0oK
+.evv 에 아래 값 필요합니다.
+PDF_SERVICES_CLIENT_ID= 
+PDF_SERVICES_CLIENT_SECRET=
 OPENAI_API_KEY=
-SUPABASE_URL=https://wnbfjewwrbfzkxwhowek.supabase.co/
-SUPABASE_SERVICE_ROLE_KEY=sb_secret_0esilyIgHR6-D-Saym6Drg_d7Sl2xMH
+SUPABASE_URL=https:/...
+SUPABASE_SERVICE_ROLE_KEY=...
