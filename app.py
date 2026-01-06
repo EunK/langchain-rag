@@ -18,7 +18,7 @@ st.title("📘 PDF 매뉴얼 RAG 챗봇 (Supabase + OpenAI)")
 
 if not settings.openai_api_key or not settings.supabase_url or not settings.supabase_service_key:
     st.warning(
-        "환경변수가 필요합니다.\n\n"
+        "환경변수가 필요합니다!\n\n"
         "- OPENAI_API_KEY\n"
         "- SUPABASE_URL\n"
         "- SUPABASE_SERVICE_ROLE_KEY\n"
