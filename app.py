@@ -168,7 +168,21 @@ else:
         height=120,
     )
 
-    send = st.button("질문 전송", type="primary", disabled=not question.strip())
+    col1, col2, space = st.columns([2, 0.8, 5])
+    with col1:
+        send = st.button(
+            "질문 전송", 
+            type="primary", 
+            disabled=not question.strip() if question else True,
+            use_container_width=True
+        )
+
+    with col2:
+        voice_btn = st.button("🎙️", use_container_width=True, key="voice_btn_btn")
+
+    with space:
+        # 아무것도 작성하지 않으면 빈 공간으로 남습니다.
+        pass
 
     if send:
         # 전송은 질문창 내용만 사용 (OCR 재실행과 무관)
