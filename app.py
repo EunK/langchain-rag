@@ -18,10 +18,10 @@ import tempfile
 from process_rag_query import process_rag_query
 from render import render_related_pages, get_related_pages
 
-st.set_page_config(page_title="OpsGuide AI", layout="wide")
+st.set_page_config(page_title="NexOps-가장 명확한 근거, 가장 빠른 현장 조치", layout="wide")
 settings = load_settings()
 
-st.title("🛡️ OpsGuide AI for Security 🖥️")
+st.title("🛡️ NexOps")
 
 if not settings.openai_api_key or not settings.supabase_url or not settings.supabase_service_key:
     st.warning(
@@ -32,7 +32,7 @@ if not settings.openai_api_key or not settings.supabase_url or not settings.supa
     )
     st.stop()
 
-mode = st.sidebar.radio("메뉴", ["사용자 : 운영지원 챗봇", "관리자 : 매뉴얼 업로드/적재"])
+mode = st.sidebar.radio("메뉴", ["AI 현장 가이드", "지식 자산 관리"])
 
 st.sidebar.markdown("---")
 settings.similarity_threshold = st.sidebar.slider(
@@ -58,8 +58,8 @@ resize_max_px = st.sidebar.slider(
 # -------------------------
 # Admin
 # -------------------------
-if mode == "관리자 : 매뉴얼 업로드/적재":
-    st.subheader("관리자 : 매뉴얼 업로드 및 RAG 적재")
+if mode == "지식 자산 관리":
+    st.subheader("매뉴얼 업로드 및 AI 지식 엔진 구축")
 
     title = st.text_input("문서 제목(예: 장비A_매뉴얼)", value="")
     pdf = st.file_uploader("PDF 업로드", type=["pdf"])
@@ -110,7 +110,7 @@ if mode == "관리자 : 매뉴얼 업로드/적재":
 # Chatbot
 # -------------------------
 else:
-    st.subheader("장비운영지원 Q&A")
+    st.subheader("현장 질문톡")
 
     docs = list_docs(settings)
     doc_options = [{"id": None, "title": "전체 문서(모든 매뉴얼)"}] + [
