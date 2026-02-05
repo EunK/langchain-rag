@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 
 @dataclass
 class Settings:
-    openai_api_key: str
+    googl_api_key: str
     supabase_url: str
     supabase_service_key: str
     storage_bucket: str = "manual-pages"

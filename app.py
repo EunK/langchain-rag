@@ -2,11 +2,11 @@ import hashlib
 import streamlit as st
 
 from config import load_settings
-from clients import get_openai_client
+from clients import get_gemini_client
 from ocr_service import extract_text_from_image_gpt41mini
 from ingest_service import ingest_pdf_to_supabase
 from retrieval_service import retrieve_contexts, list_docs, get_page_image_url
-from answer_service import openai_answer_with_rag
+# from answer_service import gemini_answer_with_rag
 from storage_service import delete_doc_and_assets
 from utils_text import is_refusal_answer, merge_pages_cited_then_search
 from PIL import Image
@@ -23,10 +23,10 @@ settings = load_settings()
 
 st.title("🛡️ NexOps for Security")
 
-if not settings.openai_api_key or not settings.supabase_url or not settings.supabase_service_key:
+if not settings.googl_api_key or not settings.supabase_url or not settings.supabase_service_key:
     st.warning(
         "환경변수가 필요합니다!\n\n"
-        "- OPENAI_API_KEY\n"
+        "- GOOGLE_API_KEY\n"
         "- SUPABASE_URL\n"
         "- SUPABASE_SERVICE_ROLE_KEY\n"
     )
@@ -214,7 +214,7 @@ else:
             # Whisper API 호출
             with st.spinner("🤖 음성을 텍스트로 변환 중..."):
                 with open(wav_path, "rb") as audio_file:
-                    client = get_openai_client(settings.openai_api_key)
+                    client = get_gemini_client(settings.googl_api_key, "whisper-1")
                     transcript = client.audio.transcriptions.create(
                         model="whisper-1",
                         file=audio_file,
@@ -329,7 +329,7 @@ else:
         # ✅ 새 이미지일 때만 OCR 실행
         if st.session_state.ocr_image_signature != image_signature:
             with st.spinner("이미지에서 문자 추출 중 (gpt-4.1-mini)..."):
-                oai = get_openai_client(settings.openai_api_key)
+                oai = get_gemini_client(settings.googl_api_key, "gemini-1.5-flash")
                 ocr_text = extract_text_from_image_gpt41mini(oai, img_bytes, mime)
 
             st.session_state.ocr_image_signature = image_signature

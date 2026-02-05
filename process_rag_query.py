@@ -1,6 +1,6 @@
 from retrieval_service import retrieve_contexts
-from clients import get_openai_client
-from answer_service import openai_answer_with_rag
+from clients import get_gemini_client
+from answer_service import gemini_answer_with_rag
 from utils_text import is_refusal_answer, merge_pages_cited_then_search
 
 def process_rag_query(settings, question, doc_id_filter=None):
@@ -20,8 +20,8 @@ def process_rag_query(settings, question, doc_id_filter=None):
         answer = "문서에 존재하지 않습니다."
     else:
         # 3. 답변 생성 (Generate)
-        oai = get_openai_client(settings.openai_api_key)
-        out = openai_answer_with_rag(oai, settings.chat_model, question, contexts)
+        gemini = get_gemini_client(settings.googl_api_key)
+        out = gemini_answer_with_rag(gemini, settings.chat_model, question, contexts)
         answer = out["answer"]
         cited_pages = out.get("cited_pages", [])
 
